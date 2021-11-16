@@ -58,7 +58,7 @@ class Album extends React.Component {
             <h2 data-testid="album-name">{ this.getAlbumName() }</h2>
             <h3 data-testid="artist-name">{ this.getArtistName() }</h3>
             {songs.slice(1).map((song) => (
-              <MusicCard key={ song.trackId } { ...song } />
+              <MusicCard key={ song.trackId } song={ song } />
             ))}
           </div>
         )}
