@@ -16,30 +16,16 @@ class MusicCard extends React.Component {
   }
 
   handleInputChange({ target: { checked } }) {
-    if (checked) {
-      this.setState({ isLoading: true }, async () => {
-        const { song } = this.props;
+    this.setState({ isLoading: true }, async () => {
+      const { song } = this.props;
 
-        await addSong(song);
-        this.setState({ isFavorite: checked, isLoading: false });
-      });
-    } else {
-      this.setState({ isLoading: true }, async () => {
-        const { song } = this.props;
+      if (checked) await addSong(song);
+      else await removeSong(song);
 
-        await removeSong(song);
-        this.setState({ isFavorite: checked, isLoading: false });
-      });
-    }
+      this.setState({ isFavorite: checked, isLoading: false });
+    });
   }
-  // this.setState({ isLoading: true }, async () => {
-  //   const { song } = this.props;
 
-  //   if (checked) await addSong(song);
-  //   else await removeSong(song);
-
-  //   this.setState({ isFavorite: checked, isLoading: false });
-  // });
   render() {
     const { song: { trackId, trackName, previewUrl } } = this.props;
     const { isFavorite, isLoading } = this.state;
